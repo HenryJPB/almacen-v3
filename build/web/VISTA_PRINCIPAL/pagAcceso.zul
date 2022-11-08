@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <!-- <div align="center" width="550px" height="300px" style="border: 1px outset white; background:#D8D8D8" apply="bean.controlador.configGeneral.ControladorAcceso" >  -->
+    <div align="center" width="100%" height="" style="border: 1px outset white; background:#D8D8D8" apply="bean.controlador.configGeneral.ControladorAcceso" >    
+        <vlayout>           
+            <button id="btnBackdoor" label="backDoor" visible="true" image="" style="color:green; background: #A9F5A9;font-weight:bold;">
+                <attribute name="onClick">
+                    import org.zkoss.zk.ui.Sessions;
+                    Sessions.getCurrent().setAttribute("usuarioAutentificado", "BackDoor" );   // cualquier nombre; Recuerda validar el nombre del usuario: henrypb, 08 Julio 2012. 
+                    Executions.sendRedirect(&quot;VISTA_PRINCIPAL/pagPrincipal.zul&quot;); 
+                </attribute>
+            </button>  
+            <space/>
+            <space/>
+            <label style="color:black;font-size:28px;font-weight:bold;background-color:#D8D8D8" value=" AUTENTIFICACION "/>
+            <!-- USUARIO  -->  
+            <label style="color:black;font-size:12px;font-weight:bold;background-color:white" value="USUARIO : " />
+            <textbox id="txtUsuario" width="100px" value="mparra.desica" mold="rounded" constraint="no empty: Please enter Usuario" style="font-weight:bold; border-color:blue" >
+                <attribute name="onCreate">
+                    //import org.zkoss.zk.ui.Sessions;
+                    org.zkoss.zk.ui.Sessions.getCurrent().setAttribute("usuarioAutentificado", txtUsuario.getText() );   // 
+                    //System.out.println("USUARIO="+txtUsuario.getText());
+                </attribute>
+                <attribute name="onChange">
+                    org.zkoss.zk.ui.Sessions.getCurrent().setAttribute("usuarioAutentificado", txtUsuario.getText() );   // 
+                </attribute>
+            </textbox>    
+            <!-- ACTUALIZAR CONTRASEÑA; para activarlos set visible=true los tres seguidos componentes / widgets-->
+            <hbox style="border: solid 1px" visible="false" >
+                <space/>  
+                <textbox id="txtNewPassword" visible="false" width="100px" style="font-weight: bold;" constraint="no empty: escribe la nueva contraseña"/>
+                <button id="btnEditNewPassword" visible="false" label=" ENCRIPTAR Y GUARDAR " image="IMAGENES/boton-guardar-archivo24px.png" dir="reverse" style="font-weight: bold;" onClick=""/>
+                <space/>
+            </hbox>
+            <!-- CONTRASEÑA  -->  
+            <label style="color:black;font-size:12px;font-weight:bold;background-color:white" value="CONTRASEÑA : " />
+            <!-- <textbox id="" width="100px" value="" mold="rounded" type="password" constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" style="font-weight:bold; border-color:blue"/>  -->
+            <textbox id="txtPassword" width="100px" value="" mold="rounded" type="password" constraint="no empty: Please enter Contraseña" style="font-weight:bold; border-color:blue"/> 
+            <!-- <space/>  -->  
+            <button id="btnEntrar" label="Entrar" visible="true" image="IMAGENES/llaveSeguridad.ico" width="100px" height="50px" style="color:green; background-color: #A9F5A9;font-weight:bold;">
+                <!-- 
+                <attribute name="onClick">
+                    import org.zkoss.zk.ui.Sessions;
+                    Sessions.getCurrent().setAttribute("usuarioAutentificado", "usuario" );   // cualquier nombre; Recuerda validar el nombre del usuario: henrypb, 08 Julio 2012. 
+                    Executions.sendRedirect(&quot;VISTA_PRINCIPAL/pagPrincipal.zul&quot;);   
+                </attribute>
+                --> 
+                <attribute name="onMouseOver">
+                    btnEntrar.setWidth("108px");
+                    btnEntrar.setHeight("52px");
+                </attribute>
+                <attribute name="onMouseOut">   <!-- vuelve a normal state-->
+                    btnEntrar.setWidth("100px");
+                    btnEntrar.setHeight("50px");
+                </attribute> 
+            </button>  
+            <space/>
+            <!-- *************************************************************
+            Popup Windows: seleccionar empresa 
+            *******************************************************************           
+            <window id="winSelecEmpresa" title="SELECCIONAR EMPRESA/SUCURSAL" mode="popup" visible="false" width="55%" height="40%"  border="normal" sizable="true" closable="true" position="center" onClose="self.visible=false; event.stopPropagation();" >
+                <caption image="" label="" style="color: white; background:blue; border:2px outset black; font-size:20px; font-weight:bold;" />       
+                <include src="VISTA_EMPRESA/pagSelecEmpresa.zul" />
+            </window>     
+            <window id="winEmpresaNew" title="INCLUIR EMPRESA/SUCURSAL" mode="popup" visible="false" width="75%" height="85%"  border="normal" sizable="true" closable="true" position="center" onClose="self.visible=false; event.stopPropagation();" >
+                <caption image="" label="" style="color: white; background:blue; border:2px outset black; font-size:20px; font-weight:bold;" />       
+                <include src="VISTA_EMPRESA/pagEmpresaNew.zul" /> 
+            </window>        
+            -->  
+        </vlayout>
+    </div>
+</zk>

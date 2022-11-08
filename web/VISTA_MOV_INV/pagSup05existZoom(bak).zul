@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="winZoomExist" title="ZOOM REGISTRO" border="normal" height="50%" width="41%" closable="true" >
+        <caption style="color: black; background: smoke; font-weight:bold; font-size: 18px;" />
+        <style src="/css/estiloHP.css"/>
+        <!-- ********************************************************************** -->
+        <!-- *******************************(ENCABEZADO.Begin)********************* -->
+        <!-- ********************************************************************** -->
+        <separator bar="true" />
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <separator bar="true" />
+        <!-- ******************************************************************* -->
+        <!-- *******************************(ENCABEZADO.End)******************** -->
+        <!-- ******************************************************************* -->
+        <space/> 
+        <vbox apply="org.zkoss.bind.BindComposer" viewModel="@id('vmZoom') @init('bean.modelo.vista.ModelViewSup05existZoom')" align="center" >
+            <!-- -->  
+            <hlayout>
+                <label id="" value="*" sclass="T1BLUE" />
+                <label id="" value="Cod Item:" sclass="T1B" /> 
+                <space/>  
+                <textbox id="txtCodItem" value="@load( vmZoom.sup05existView.coditem )" readonly="true" style=" color: black; font-size: 14px; font-weight:bold; background-color: aquamarine;" sclass="T1G" /> 
+            </hlayout>
+            <space/> 
+            <!-- -->  
+            <hlayout>
+                <label id="" value="*" sclass="T1BLUE" />
+                <label id="" value="Descripcion:" sclass="T1B" /> 
+                <space/> 
+            </hlayout>
+            <space/> 
+            <!-- --> 
+            <hlayout>
+                <label id="" value="*" sclass="T1BLUE" />
+                <label id="" value="Ubicacion:" sclass="T1B" /> 
+                <space/> 
+            </hlayout>
+            <space/>  
+            <!-- -->  
+            <hlayout>
+                <label id="" value="*" sclass="T1BLUE" />
+                <label id="" value="um:" sclass="T1B" /> 
+                <space/>
+            </hlayout>
+            <space/>  
+            <!-- -->  
+            <hlayout> 
+                <label id="" value="*" sclass="T1BLUE" />
+                <label id="" value="Existencia:" sclass="T1B" /> 
+                <space/>
+            </hlayout>
+        </vbox>
+    </window>
+</zk>

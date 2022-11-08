@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <!-- ******************************************************************* -->
+    <!-- ******************************(ENCABEZADO.Begin)******************* -->
+    <!-- ******************************************************************* -->
+    <style src="/css/estiloHP.css"/>
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewSup05existView')" >
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <hlayout style="background:lightgray;">
+            <label id="" value=" * EXISTENCIA ALMACEN " sclass="TBREADCRUMB" />
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <!-- <button id="btnZoom" height="40px" label="ZOOM (+)" image="" disabled="false" sclass="T2A"  onClick="@command('zoomRegSelected',varLbxExistencia=lbxExistencia)" />  -->
+            <button id="btnZoom" height="40px" label="ZOOM (+)" image="" disabled="false" sclass="T2A"  onClick="" />  
+            <button id="btnRfr" height="40px" label="REFRESCAR" disabled="false" sclass="T2A"/>
+            <button id="btnClr" height="40px" label="LIMPIAR FILTROS" image="" disabled="false" sclass="T2A"  onClick="@command('cleanFilter')" />
+            <button id="btnIni" height="40px" label="INICIO" disabled="false" sclass="T2A"/>
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <!-- ******************************************************************** -->
+        <!-- *******************************(ENCABEZADO.End)********************* -->
+        <!-- ******************************************************************** -->  
+        <div align="center" >
+            <listbox id="lbxExistencia" model="@load(vm.sup05existViewModel)" selectedItem="@load(vm.selectedItem)" height="100%" width="100%" rows="16" checkmark="true" multiple="false" 
+                     sizedByContent="true" span="true" emptyMessage="LISTA SIN REGISTROS" mold="paging" apply="bean.controlador.sup05.ControladorSup05exist">
+                <!--   ???? 
+                <auxhead sclass="category-center">  
+                    <auxheader colspan="4"> 
+                        <button id="btnLimpiarFiltros" label="Limpiar filtros" image="../IMAGENES/broom-icon.png" sclass="T1B" >
+                            <attribute name="onClick">
+                                <![CDATA[
+                                  //System.out.println("Limpiar filtros");
+                                  txtFiltroCod="";   ( Asi NO <-> error!! es un widget 
+                                  txtFiltroCod.setText("");
+                                  txtFiltroDescrip.setText("");
+                                  txtFiltroUbic.setText(""); 
+                                  .
+                                  .
+                                ]]>  
+                            </attribute>
+                        </button>
+                    </auxheader>
+                </auxhead>
+                -->
+                <auxhead sclass="category-center">  
+                    <auxheader colspan="1">  <!-- codigo -->  
+                        <image src="../IMAGENES/vinocular-icon24px.png" />
+                        <textbox id="txtFiltroCod" instant="true" width="" value="@bind(vm.itemExistViewFilter.codItem)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- descripcion -->  
+                        <image src="../IMAGENES/vinocular-icon24px.png" />
+                        <textbox id="txtFiltroDescrip" instant="true" width="" value="@bind(vm.itemExistViewFilter.descripcion)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- ubicacion -->  
+                        <image src="../IMAGENES/vinocular-icon24px.png" />
+                        <textbox id="txtFiltroUbic" instant="true" width="" value="@bind(vm.itemExistViewFilter.ubicacion)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- um -->  
+                        <image src="../IMAGENES/vinocular-icon24px.png" />
+                        <textbox id="txtFiltroUm" instant="true" width="" value="@bind(vm.itemExistViewFilter.um)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- existencia -->  
+                        <image src="../IMAGENES/vinocular-icon24px.png" />
+                        <textbox id="txtFiltroExist" instant="true" width="" value="@bind(vm.itemExistViewFilter.existencia)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                </auxhead>
+                <listhead>      
+                    <listheader hflex="min" sort="auto(codItem)" label="Cod Item" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;"  />  
+                    <listheader hflex="min" sort="auto(descripcion)" label="Descripcion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(ubicacion)" label="Ubicacion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(um)" label="um" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(existencia)" label="Existencia" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="@load(each.codItem)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.descripcion)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.ubicacion)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.um)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.existencia)" style="color:black; font-size: 14px;" /> 
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+    </div>
+</zk>

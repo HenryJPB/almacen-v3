@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style src="../css/estiloHP.css"/>
+    <space/>
+    <space/>
+    <space/>
+    <space/>
+    <hbox width="100%" >
+        <zscript>
+            <![CDATA[
+                // Ejemplos varios:  
+                String[] nomina={"Jose","Jaime","Tobolda","Oscar de Leon","Harry el Sucio","Mr.Jhon","WY","Vinagre","Caramelito de Sabila","El Mismo","EL Otro","Julian"};
+                String[] lenguajes = {"Ada","Basic","C","C++","CSS","Cobol","Forth","Fortran",
+                                      "Go","Groovy","Haskell","HTML","Java","JavaScript","Lisp","Python","Ruby","Scala","Scheme"};
+               //
+               String razonSocial = (String) Sessions.getCurrent().getAttribute("razonSocial");  
+               java.util.Date fechaHOY = new Date();  
+            ]]>
+        </zscript> 
+        <space/>
+        <space/>
+        <label id="" value="DERIVADOS SIDERURGICOS,C.A." sclass="T1B" />
+        <!-- <label id="" value="${razonSocial}" sclass="subTitulo3" /> -->  
+        <!-- <label value="J-08503850-7" sclass="subTitulo3"/> --> 
+        <space spacing="60px" />
+        <!-- <label id="" value="TABULADOR" style="color:white; background:white;font-size:24px;" />  -->
+        <label id="" value="ALMACEN DE SUPLIDOS Y REPUESTOS" sclass="T1W"/>  <!-- sclass="subtitulo1white" -->
+        <space spacing="60px" />
+        <vlayout>
+            <hlayout>
+                <label id="" value="usuario :" sclass="T1" style="text-decoration:underline;" />
+                <label id="lblUsario" value="" sclass="T1A" >
+                    <attribute name="onCreate">
+                        //import org.zkoss.zk.ui.Sessions;
+                        String usuario = org.zkoss.zk.ui.Sessions.getCurrent().getAttribute("usuarioAutentificado");
+                        self.setValue(usuario);  
+                    </attribute>
+                </label>
+            </hlayout>
+            <label value="${fechaHOY}"  sclass="ta" visible="true"/>
+        </vlayout>
+        <space spacing="110px" />
+        <button id="btnDesconectar" label=" desconectar " style="border-color:black; border:1px; border-radius:12px; background:green; color: white; text-shadow: 2px 2px red; font-size:14px;text-decoration:underline;">
+            <attribute name="onClick">
+                Executions.sendRedirect(&quot;../index.zul&quot;); 
+            </attribute>
+            <!--
+            <attribute name="onMouseOver">
+                btnDesconectar.setWidth("110%");
+                btnDesconectar.setHeight("90%");  
+            </attribute>
+            <attribute name="onMouseOut">    vuelve a normal state
+                btnDesconectar.setWidth("100%");
+                btnDesconectar.setHeight("100%"); 
+            </attribute> 
+            -->  
+        </button>
+    </hbox>
+    <space/>
+    <space/>
+</zk>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/css/estiloHP.css"/>
+    <style dynamic="true">
+        .myT1 {
+        //border: 20px solid red;
+        font-size:16px;
+        font-weight:bold;
+        }
+    </style>
+    <borderlayout>
+        <north height="" >
+            <div style="background-color:blue;"  >
+                <!-- <div style="background-color:aquamarine;"  >  -->
+                <!-- <separator bar="true" width="100%" style="color:blue;"/>  -->  
+                <include id="" src="../VISTA_ACCESORIOS/encabezado.zul" />
+                <!-- <button id="" label="" width="100%" style="border: none; border-radius: 0px; background: #7f8c8d; color: white; text-shadow: none; font-size: 18px;"/> -->
+                <!-- <separator bar="true" width="100%" style="color:blue;"/>  -->
+                <!-- <button id="" label="" width="100%" style="border: none; border-radius: 0px; background: ligth-blue; color: blue; text-shadow: none; font-size: 18px;"/>  -->  
+                <!-- <separator bar="true" style="color:white; background:ligth-grey;"/>  -->
+            </div>
+        </north>
+        <west title="" size="20%" flex="true" splittable="true" collapsible="true" >
+            <!--  
+            <menubar id="mnuInformes" draggable="false" scrollable="false" visible="true" orient="vertical" >
+                <menu label="ACTUALIZAR" style="color:red;font-size:24px;" >
+                    <menupopup>
+                        <menuitem id="mnnAddIngreso" label="Agregar Nuevo Registro" style="" />   
+                        <menuitem id="mnnEditIngreso" label="Editar Registro" image="../Imagenes/updateIcon16px.png" />             
+                        <menuitem id="mnnEliminar" label="Eliminar Registro" image="../Imagenes/delete16px.png" />                          
+                        <menuitem id="mnnRefrescar" label="Resfrescar Grilla" image="../Imagenes/refresh16px.png" />                          
+                    </menupopup>
+                </menu> 
+                <menu label="INFORMES" sclass="T2" >
+                    <menupopup>
+                        <menuitem id="mnnPrintIngreso" label="Comprobante de Ingreso" style="" image="../Imagenes/printIcon16px.png" onClick="" />
+                        <menuitem id="mnnPrintRelacionIng" label="Relacion de Ingresos" style="" image="../Imagenes/printIcon16px.png" onClick="Executions.sendRedirect(&quot;../VistaReporte/informeRelacionIng.zul&quot;)" />
+                        <menuitem id="mnnPrintRelacionIng_forRev" label="Relacion de Ingresos (en formato para Revision)" style="" image="../Imagenes/printIcon16px.png" onClick="Executions.sendRedirect(&quot;../VistaReporte/informeRelacionIng_forRev.zul&quot;)" />
+                        <menuitem id="mnnPrintRelacionIng_vExcel" label="Relacion de Ingresos (v.Excel)" style="" image="../Imagenes/printIcon16px.png" onClick="Executions.sendRedirect(&quot;../VistaReporte/informeRelacionIng_vExcel.zul&quot;)" />               
+                    </menupopup>
+                </menu>
+            </menubar> 
+            <style dynamic="true">
+                .myT1 {
+                //border: 20px solid red;
+                font-size:16px;
+                font-weight:bold;
+                }
+            </style>
+            -->  
+            <!-- ** -->
+            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| --> 
+            <!-- *********** MENU OPERACIONAL basado en una estructura tree ******************* -->
+            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <tree id="tree" width="70%" rows="10" >
+                <treechildren style="background-color:lightblue;" >
+                    <treeitem>
+                        <treerow>
+                            <treecell label="INICIO" style="color:black;font-size:16px;font-weight:bold;">
+                                <attribute name="onClick">
+                                    <![CDATA[
+                                        incPag.setSrc("../VISTA_INICIO/pagInicio.zul"); 
+                                    ]]>                                        
+                                </attribute>                
+                            </treecell>
+                        </treerow>
+                    </treeitem>    
+                    <!-- ****************************************************-->
+                    <!-- **DEFINICIONES *************************************-->    
+                    <!-- ****************************************************-->
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="DEFINICIONES" style="color:black;font-size:16px;font-weight:bold;"/>
+                        </treerow>
+                        <treechildren>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="PERIODOS" style="color:black;font-size:15px;font-weight:bold;font-style:normal;">  <!-- onClick='alert("DATOS DE LA EMPRESA")' />  -->
+                                        <attribute name="onClick">
+                                            //import org.zkoss.zk.ui.Sessions;
+                                            //Sessions.getCurrent().setAttribute("usuarioAutentificado", "usuario" );   // cualquier nombre; Recuerda validar el nombre del usuario: henrypb, 08 Julio 2012. 
+                                            //Executions.sendRedirect(&quot;VistaPrincipal/pagPrincipal.zul&quot;); 
+                                            //alert("DATOS DE LA EMPRESA");  
+                                            //vistaInclude="../VISTA_EMPRESA/empresa.zul"; 
+                                            //System.err.println("*****VISTA:"+vistaInclude+"****");       
+                                            // <![CDATA[
+                                            //    incPag.setSrc("../VISTA_EMPRESA/pagEmpresaEdit.zul"); 
+                                            // ]]>
+                                        </attribute>
+                                    </treecell>
+                                </treerow>
+                            </treeitem>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="ITEMS" style="color:black;font-size:15px;font-weight:bold;font-style:normal;">
+                                        <attribute name="onClick">
+                                            <![CDATA[
+                                                incPag.setSrc("../VISTA_ITEM/pagItem.zul"); 
+                                            ]]>
+                                        </attribute>
+                                    </treecell>
+                                </treerow>
+                            </treeitem>
+                            <treeitem>
+                                <treerow>    <!-- NIVELES ORGANIZACIONALES-->
+                                    <treecell label="CENTROS DE COSTOS" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" />
+                                </treerow>
+                            </treeitem>
+                        </treechildren>   
+                    </treeitem>
+                    <!-- ****************************************************-->
+                    <!-- ****ACTUALIZAR************************************* -->
+                    <!-- ****************************************************-->
+                    <treeitem open="false" >
+                        <treerow>
+                            <treecell label="PROCESOS" style="color:black;font-size:16px;font-weight:bold;" />
+                        </treerow>
+                        <treechildren>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="ACTUALIZAR INVENTARIO" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" >
+                                        <attribute name="onClick">
+                                            <![CDATA[
+                                                //incPag.setSrc("../VISTA_MOV_INV/pagSup05Vista_vADBinder.zul");   // ..A)nnotateD)ataBinder
+                                                incPag.setSrc("../VISTA_MOV_INV/pagSup05Vista.zul"); 
+                                            ]]>
+                                        </attribute>
+                                    </treecell>
+                                </treerow>
+                            </treeitem>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="CIERRE PERIODOS" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" />
+                                </treerow>
+                            </treeitem>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="CONTABLIZAR" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" />
+                                </treerow>
+                            </treeitem>
+                        </treechildren>
+                    </treeitem>
+                    <!-- **CONSULTAS** -->  
+                    <treeitem open="false" >
+                        <treerow>
+                            <treecell label="CONSULTAS" style="color:black;font-size:16px;font-weight:bold;" />
+                        </treerow>
+                        <treechildren>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="EXISTENCIA" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" />
+                                    <attribute name="onClick">
+                                        <![CDATA[
+                                            incPag.setSrc("../VISTA_MOV_INV/pagSup05existView.zul"); 
+                                        ]]>
+                                    </attribute>
+                                </treerow>
+                            </treeitem>
+                        </treechildren>
+                    </treeitem>
+                    <!-- **INFORMES** -->
+                    <treeitem open="false" >
+                        <treerow>
+                            <treecell label="INFORMES" style="color:black;font-size:16px;font-weight:bold;" >
+                                <attribute name="onClick">
+                                    <![CDATA[
+                                        incPag.setSrc("../VISTA_INFORME/pagInformes.zul"); 
+                                    ]]>
+                                </attribute>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <!-- ****************************************************-->
+                    <!-- ** Administracion y/o COnfiguracion General ******* -->  
+                    <!-- ****************************************************-->
+                    <treeitem open="false">
+                        <treerow>
+                            <treecell label="ADMINISTRACION" style="color:black;font-size:16px;font-weight:bold;" />
+                        </treerow>
+                        <treechildren>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="CONFIG GENERAL" style="color:black;font-size:15px;font-weight:bold;font-style:normal;">
+                                        <attribute name="onClick" >
+                                          <![CDATA[
+                                              incPag.setSrc("../VISTA_CONFIG_GEN/pagConfigGeneral.zul"); 
+                                          ]]>
+                                        </attribute>
+                                    </treecell>
+                                </treerow>
+                            </treeitem>
+                            <treeitem>
+                                <treerow>
+                                    <treecell label="SEGURIDAD" style="color:black;font-size:15px;font-weight:bold;font-style:normal;" />
+                                </treerow>
+                            </treeitem>
+                        </treechildren>
+                    </treeitem>
+                </treechildren>
+            </tree>
+        </west>
+        <center border="none" flex="true">
+            <!-- BorderLayout : center  -->  
+            <zscript><![CDATA[
+                //contacts = new String[] {"Monday", "Tuesday", "Wednesday"};  // Otro forma de Iniciar un arreglo de String
+                //Sessions.getCurrent().setAttribute("usuarioAutentificado", "usuario" ); 
+                String pagInclude = (String) Sessions.getCurrent().getAttribute("pagInclude");
+                if ( pagInclude==null || pagInclude.equals("inicio") ) {
+                     pagInclude="../VISTA_INICIO/pagInicio.zul";  
+                }
+               ]]>
+            </zscript>
+            <include id="incPag" src="${pagInclude}" />	
+            <zscript>
+            <![CDATA[
+              Sessions.getCurrent().setAttribute("incPag", incPag ); 
+            ]]>  	
+            </zscript>
+        </center>
+        <!--
+        <east size="50%" border="none" flex="true">
+            BorderLayout : east
+        </east>
+        -->  
+        <south size="1%" border="mold">
+            <separator/>
+        </south>  
+    </borderlayout>
+</zk>
+<!--  ** NO te lo perdas zkscript example:  ** 
+<window>
+    <zscript><![CDATA[
+    contacts = new String[] {"Monday", "Tuesday", "Wednesday"};
+    ]]>
+    </zscript>
+    <listbox>
+        <listitem label="${each}" forEach="${contacts}"/>
+    </listbox>
+</window> 
+-->

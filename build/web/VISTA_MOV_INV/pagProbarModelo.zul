@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?> :: Esto genera salidas Indeseables **** ????? REVISAR -->  
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="winSup05DatEdit" title="EDITAR REGISTRO" border="normal" height="80%" width="35%" closable="true" style="font-size: 20px; font-weight: bold;" >
+        <style src="/css/estiloHP.css"/>
+        <div align="center" >
+            <hlayout style="background:lightgray;" >
+                <button id="btnEdit" height="40px" label="ACTUALIZAR" disabled="false" sclass="T2A" onClick="@command('btnEditClicked')" />
+                <button id="btnExit" height="40px" label="SALIR" disabled="false" onClick="winSup05DatEdit.detach();" sclass="T2A"/>    
+            </hlayout>
+            <!-- *PROCESOS* -->  
+            <vlayout apply="org.zkoss.bind.BindComposer" viewModel="@id('vmPro') @init('bean.modelo.vista.ModelViewSup08Dat')" >
+                <bandbox id="bbxProceso" width="30%" mold="rounded" autodrop="true" tabindex="5" sclass="T1B" style="font-weight: bold; font-size: 12px;" >
+                    <bandpopup>
+                        <listbox id="lbxProcesos" model="@load(vmPro.viewSup08DatModel)" height="150px" width="220px" rows="6" checkmark="false" multiple="false" 
+                                 emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vmPro.selectedProceso)" onSelect="bbxProceso.value=self.selectedItem.label; bbxProceso.close();" >
+                            <listhead>
+                                <listheader hflex="1" label="Cod Proc" sort="auto(c8CodProceso)" style="color:#555; font-style: normal; font-weight:bold; font-size:14px;" />
+                                <listheader hflex="1" label="Proceso" sort="auto(c8NombreProc)" style="color:#555; font-style: normal; font-weight:bold; font-size:14px;" />
+                            </listhead>  
+                            <template name="model" var="sup08Dat" >
+                                <listitem> 
+                                    <listcell label="@load(sup08Dat.c8CodProceso)" style="color:black; font-size: 14px;" />
+                                    <listcell label="@load(sup08Dat.c8NombreProc)" style="color:black; font-size: 14px;" />
+                                </listitem>
+                            </template>  
+                        </listbox>          
+                    </bandpopup>
+                </bandbox>
+            </vlayout>
+            <!-- *MAQUINAS DE PLANTA* -->
+            <vlayout apply="org.zkoss.bind.BindComposer" viewModel="@id('vmMaq') @init('bean.modelo.vista.ModelViewMant01View')">
+                <bandbox id="bbxMaquina" width="30%" mold="rounded" autodrop="true" tabindex="5" sclass="T1B" style="font-weight: bold; font-size: 12px;" >
+                    <bandpopup>
+                        <listbox id="lbxMaquinas" model="@load(vmMaq.viewMant01ViewModel)" height="150px" width="300px" rows="6" checkmark="false" multiple="false" 
+                                 emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vmMaq.selectedMaquina)" onSelect="bbxMaquina.value=self.selectedItem.label; bbxMaquina.close();" >
+                            <!-- 
+                            <auxhead sclass="category-center">
+                                <auxheader label="MAQUINAS" colspan="3" style="font-weight:bold; font-size: 16px"/>
+                            </auxhead>
+                            -->  
+                            <listhead>
+                                <listheader hflex="1" label="Cod Maq" sort="auto(c1CodMaquina)" style="color:#555; font-style: normal; font-weight:bold; font-size:14px;" />
+                                <listheader hflex="1" label="Maquina" sort="auto(c1Descripcion)" style="color:#555; font-style: normal; font-weight:bold; font-size:14px;" />
+                            </listhead>
+                            <template name="model" var="mant01View" >
+                                <listitem> 
+                                    <listcell label="@load(mant01View.c1CodMaquina)" style="color:black; font-size: 14px;" />
+                                    <listcell label="@load(mant01View.c1Descripcion)" style="color:black; font-size: 14px;" />
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </bandpopup>
+                </bandbox>
+            </vlayout>
+            <!-- <button id="btnRecuerdame" label="RECUERDAME" width="100%" sclass="T2A" /> -->
+            <!-- Listbox historicos de variables --> 
+            <!--
+            <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vmVarHist') @init('bean.modelo.vista.ModelViewVariableHist')"> 
+                <listbox id="lbxVariableHist" model="@load(vmVarHist.variableHistViewModel)" height="60%" width="100%" rows="6" checkmark="true" multiple="false" 
+                             emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vmVarHist.selectedVariableHist)" >
+                    <auxhead sclass="category-center">
+                        <auxheader label="HISTORICO DE VARIABLES " colspan="3" style="font-weight:bold; font-size: 16px"/>
+                    </auxhead>
+                    <listhead>
+                        <listheader hflex="1" label="Valor" sort="auto(valor)" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                        <listheader hflex="1" label="Fecha vigencia" sort="auto(fechaVigencia)" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                        <listheader hflex="1" label="Eliminar" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                    </listhead>
+                    <template name="model" var="NomVarDatHist" >
+                        <listitem>  
+                            <listitem self="@(each='NomVarDat')" value="@(NomVarDat)" >  Ver: pagInv06.zul ERROR !!! 
+                            <listcell label="@load(NomVarDatHist.valor)" style="color:black; font-size: 16px;" />
+                            <listcell label="@load(NomVarDatHist.fechaVigencia)" style="color:black; font-size: 16px;" />
+                            <listcell>
+                                <datebox format="dd/MM/yyyy" value="@load(NomVarDatHist.fechaVigencia)" buttonVisible="false" readonly="true" style="color:black; font-size: 16px;" />
+                            </listcell>
+                            <listcell>
+                                 <checkbox id="" label="" checked="@load(NomVarDat.conforme)" disabled="true" /> 
+                                <button  label="" image="../IMAGENES/delete16px.png" onClick="@command('btnEliminar',selectedVariableHist=vmVarHist.selectedVariableHist)" style="" /> 
+                            </listcell>   
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+            -->  
+        </div>
+    </window>
+</zk>

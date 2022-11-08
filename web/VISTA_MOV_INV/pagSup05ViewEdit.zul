@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="winSup05ViewEdit" title="EDITAR REGISTRO" border="normal" height="90%" width="35%" closable="true">
+        <style src="/css/estiloHP.css"/>
+        <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewSup05ViewEdit')" >
+            <hlayout style="background:lightgray;" >
+                <button id="btnEdit" height="40px" label="ACTUALIZAR" disabled="false" sclass="T2A" onClick="@command('btnEditClicked')" />
+                <button id="btnExit" height="40px" label="SALIR" disabled="false" onClick="winSup05ViewEdit.detach();" sclass="T2A"/>    
+            </hlayout>
+            <space/>
+            <space/>
+            <hlayout>
+                <space/>  
+                <div  align="" form="@id('fx') @load(vm.sup05View) @save(vm.sup05View,before='update')" >
+                    <separator bar="true" />
+                    <!-- *Campos claves* -->  
+                    <hlayout>
+                        <label id="" value="*" sclass="T1R" />
+                        <label id="" value="Cod Item:" sclass="T1B" /> 
+                        <space/> 
+                        <textbox id="lblCodItem" value="@load(vm.sup05View.getCoditem())" readonly="true" style="color: black; font-size: 14px; font-weight:bold; background-color: lightgreen;" sclass="T1G" /> 
+                    </hlayout>
+                    <hlayout>
+                        <space/>  
+                        <label id="" value="Descripcion:" style="" sclass="T1B"/>
+                        <space/>
+                        <textbox id="txtDescripcion" value="@bind(vm.sup05View.getDescripcion())" readonly="true" style=" color: black; font-size: 14px; font-weight:bold; background-color: lightgreen;" sclass="T1B" />
+                    </hlayout>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1R" /> 
+                        <label id="" value="Fecha:" sclass="T1B" /> 
+                        <space/>  
+                        <datebox id="dbFecha" value="@load(vm.sup05View.getFecha())" format="dd/MM/yyyy" readonly="true" onChange="" style=" color: black; font-size: 14px; font-weight:bold; background-color: lightgreen;" sclass="T1A" buttonVisible="false" /> 
+                    </hlayout>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1R" />
+                        <label id="" value="Tipo Mov:" sclass="T1B"/>
+                        <space/>
+                        <textbox id="lblTipoMov" value="@load(vm.sup05View.getTipomov())" readonly="true" style=" color: black; font-size: 14px; font-weight:bold; background-color: lightgreen;" sclass="T1A" />
+                    </hlayout>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1R" />
+                        <label id="" value="Referencia:" sclass="T1B"/>
+                        <space/>
+                        <textbox id="lblReferencia" value="@load(vm.sup05View.getReferencia())" readonly="true" style=" color: black; font-size: 14px; font-weight:bold; background-color: lightgreen;" sclass="T1G" />
+                    </hlayout>
+                    <separator bar="true" />
+                    <!-- *Fin campos claves -->
+                    <space/> 
+                    <hlayout>
+                        <vlayout>
+                            <label id="" value="*" sclass="T1BLUE" />
+                            <label id="" value="Unidades:" sclass="T1B"/>
+                            <space/>
+                            <decimalbox id="dbUnidades" value="@bind(vm.sup05View.getUnidades())" format="#,##0.00" tabindex="1" sclass="T1B" />
+                        </vlayout>
+                        <vlayout>
+                            <label id="" value="*" sclass="T1BLUE" />
+                            <label id="" value="Existencia:" sclass="T1B"/>
+                            <space/>
+                            <decimalbox id="dbExistencia" value="" format="#,##0.00" readonly="true" sclass="T1G" />
+                        </vlayout>
+                    </hlayout>
+                    <space/>
+                    <hlayout>
+                        <vlayout>
+                            <label id="" value="*" sclass="T1BLUE" />
+                            <label id="" value="Costo c/u:" sclass="T1B"/>
+                            <space/>
+                            <decimalbox id="dbCosto" value="@bind(vm.sup05View.getCosto())" format="#,##0.00" tabindex="2" sclass="T1B" />
+                        </vlayout>
+                        <vlayout>
+                            <label id="" value="*" sclass="T1BLUE" />
+                            <label id="" value="Total Costo:" sclass="T1B"/>
+                            <space/>
+                            <decimalbox id="dbTotalCosto" value="" format="#,##0.00" sclass="T1G" />
+                        </vlayout>
+                    </hlayout>
+                    <space/>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1BLUE" />
+                        <label id="" value="Cantidad Requerida:" sclass="T1B"/>
+                        <space/>
+                        <decimalbox id="dbCantRequerida" value="@bind(vm.sup05View.getCantrequerida())" format="#,##0.00" tabindex="3" sclass="T1B" />
+                    </hlayout>
+                    <space/> 
+                    <hlayout>
+                        <label id="" value="*" sclass="T1BLUE" />
+                        <label id="" value="Centro Costo:" sclass="T1B"/>
+                        <space/>
+                        <textbox id="txtCentroCosto" value="@bind(vm.sup05View.getCentrocosto())" tabindex="4" sclass="T1B" />
+                    </hlayout>
+                    <space/>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1BLUE" />
+                        <label id="" value="Cod Proceso:" sclass="T1B"/>
+                        <space/>
+                        <textbox id="txtCodProceso" value="@bind(vm.sup05View.getCodproceso())" tabindex="5" sclass="T1B" />
+                    </hlayout>
+                    <space/>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1BLUE" />
+                        <label id="" value="Cod Maquina:" sclass="T1B"/>
+                        <space/>
+                        <textbox id="txtCodMaquina" value="@bind(vm.sup05View.getCodmaquina())" tabindex="6" sclass="T1B" />
+                    </hlayout>
+                    <space/>
+                    <hlayout>
+                        <label id="" value="*" sclass="T1BLUE" />
+                        <label id="" value="Origen (Nacional/Importado):" sclass="T1B"/>
+                        <space/>
+                        <combobox id="cbbOrigen" value="@bind(vm.sup05View.getOrigen())" tabindex="7" readonly="true" sclass="T1B" >
+                            <comboitem label="I" description="I)importado" sclass="T1" />   <!-- I)mportado --> 
+                            <comboitem label="N" description="N)acional" sclass="T1" />   <!-- N)acional  -->
+                        </combobox>
+                    </hlayout>
+                </div>   
+            </hlayout> 
+            <space/>
+        </div>
+        <!-- <button id="btnRecuerdame" label="RECUERDAME" width="100%" sclass="T2A" /> -->
+        <!-- Listbox historicos de variables --> 
+        <!--
+        <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vmVarHist') @init('bean.modelo.vista.ModelViewVariableHist')"> 
+            <listbox id="lbxVariableHist" model="@load(vmVarHist.variableHistViewModel)" height="60%" width="100%" rows="6" checkmark="true" multiple="false" 
+                         emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vmVarHist.selectedVariableHist)" >
+                <auxhead sclass="category-center">
+                    <auxheader label="HISTORICO DE VARIABLES " colspan="3" style="font-weight:bold; font-size: 16px"/>
+                </auxhead>
+                <listhead>
+                    <listheader hflex="1" label="Valor" sort="auto(valor)" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="1" label="Fecha vigencia" sort="auto(fechaVigencia)" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="1" label="Eliminar" style="color:#555; font-style: normal; font-weight:bold; font-size:16px;" />
+                </listhead>
+                <template name="model" var="NomVarDatHist" >
+                    <listitem>  
+                        <listitem self="@(each='NomVarDat')" value="@(NomVarDat)" >  Ver: pagInv06.zul ERROR !!! 
+                        <listcell label="@load(NomVarDatHist.valor)" style="color:black; font-size: 16px;" />
+                        <listcell label="@load(NomVarDatHist.fechaVigencia)" style="color:black; font-size: 16px;" />
+                        <listcell>
+                            <datebox format="dd/MM/yyyy" value="@load(NomVarDatHist.fechaVigencia)" buttonVisible="false" readonly="true" style="color:black; font-size: 16px;" />
+                        </listcell>
+                        <listcell>
+                             <checkbox id="" label="" checked="@load(NomVarDat.conforme)" disabled="true" /> 
+                            <button  label="" image="../IMAGENES/delete16px.png" onClick="@command('btnEliminar',selectedVariableHist=vmVarHist.selectedVariableHist)" style="" /> 
+                        </listcell>   
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+        -->  
+    </window>
+</zk>

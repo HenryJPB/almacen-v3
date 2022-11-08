@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <!-- *******************************(ENCABEZADO.Begin)********************* -->
+    <style src="/css/estiloHP.css"/>
+    <hlayout style="background:lightgray;" >
+        <space />
+    </hlayout>
+    <hlayout style="background:lightgray;">
+        <label id="" value=" * MOVIMIENTOS DE ALMACEN " sclass="TBREADCRUMB" />
+    </hlayout>
+    <hlayout style="background:lightgray;" >
+        <button id="btnAdd" height="40px" label="AGREGAR" disabled="false" sclass="T2A" />    <!-- style="border-color:black; border:1px; border-radius:15px; background:#4682B4;"/>  -->
+        <button id="btnEdit" height="40px" label="EDITAR" disabled="false" sclass="T2A"/>
+        <button id="btnDel" height="40px" label="ELIMINAR" disabled="false" sclass="T2A"/>
+        <button id="btnRfr" height="40px" label="REFRESCAR" disabled="false" sclass="T2A"/>
+        <button id="btnIni" height="40px" label="INICIO" disabled="false" sclass="T2A"/>
+    </hlayout>
+    <hlayout style="background:lightgray;" >
+        <space />
+    </hlayout>
+    <!-- *******************************(ENCABEZADO.End)********************* -->
+    <zscript>
+        <![CDATA[
+            //String[] nomina={"Jose","Jaime","Tobolda","Oscar de Leon","Harry el Sucio","Mr.Jhon","WY","Vinagre","Caramelito de Sabila","El Mismo","EL Otro","Julian"};
+            String ruta = "../IMAGENES/PERSONAL/";  
+            String formatoImg = ".jpg";         
+        ]]>
+    </zscript>
+    <div apply="org.zkoss.bind.BindComposer" align="center" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewSup05View')" > 
+        <listbox id="lbxMovAlmacen" model="@load(vm.viewSup05ViewModel)" height="60%" width="100%" rows="15"  checkmark="true" multiple="false" 
+                 emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vm.selectedSup05View)" apply="bean.controlador.item.ControladorSup05"  >  <!-- selectedSup05View hace referencia al metodo get<> de la clase -->  
+            <auxhead>
+                <auxheader colspan="10" > 
+                    <!-- <image src="../IMAGENES/embudo-filtrante.png" />  -->  
+                    <label id="" value="Desde: " sclass="T1" style="color:black; font-style: normal; font-weight:bold; font-size:12px;"/>
+                    <!-- <datebox id="txtFecha" width="110px" disabled="true" format="dd/MM/yyyy" constraint="${fechaConstraint}" sclass="T1" style="font-size:14px;" />  -->
+                    <datebox id="txtFecha1" width="110px" disabled="false" format="dd/MM/yyyy" constraint="" onCreate="self.value=new Date()" sclass="T1" style="background: highlight; color:black; font-style: normal; font-weight:bold; font-size:14px;" />
+                    <label id="" value="Hasta: " style="color:black; font-style: normal; font-weight:bold; font-size:12px;" />
+                    <datebox id="txtFecha2" width="110px" disabled="false" format="dd/MM/yyyy" constraint="" onCreate="self.value=new Date()" sclass="T1" style="background: highlight; color:black; font-style: normal; font-weight:bold; font-size:14px;" />
+                </auxheader>
+                <!-- <auxheader colspan="2" > -->
+                    <!-- <image src="../IMAGENES/reload24px.png" />  -->  
+                    <!-- <button id="btnLimpiarKeys" label="Limpiar claves" onClick="@command('changeFilter')" sclass="T1">   @command('changeFilter') ??? -> no funciona ??? --> 
+                    <!--  
+                    <button id="btnLimpiarKeys" label="Refrescar" onClick="@command('refrescarListbox')" sclass="T1" style="color:black; font-style: normal; font-weight:bold; font-size:12px;" >
+                        <attribute name="onClick">
+                            //txtCodVarFilter.setValue(null);  
+                            //txtNombreVarFilter.setValue(null);  
+                            //txtValorFilter.setValue(null);  
+                            //@command('changeFilter');         // No funciono ???  
+                            //lbxDefVariables.renderAll();      // No funciono ???
+                            //new bean.modelo.vista.ModelViewDefVariables().changeFilter();   // No funciono ???  
+                        </attribute>
+                    </button>
+                    -->
+                <!-- </auxheader>  -->  
+            </auxhead>
+            <auxhead sclass="category-center">   
+                <!-- auxheader label="ITEMS ALMACEN" colspan="1" style="font-weight:bold; font-size: 14px"/> -->  
+                <auxheader colspan="1">  <!-- codigo -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.codItem)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!--grupo -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.descripcion)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- descripcion -->
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.fecha)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- codUbic -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />  
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.tipoMov)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- um -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.costo)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- nivelControl -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.cantRequerida)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- stockMin -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.unidades)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- stockMax -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.referencia)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>            
+                <auxheader colspan="1">  <!-- ptoReorden -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.centroCosto)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>  
+                <auxheader colspan="1">  <!-- indicador -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.codProceso)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>            
+                <auxheader colspan="1">  <!-- indicador -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.codMaquina)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+                <auxheader colspan="1">  <!-- indicador -->  
+                    <image src="../IMAGENES/embudo-filtrante.png" />
+                    <textbox instant="true" width="" value="@bind(vm.viewSup05ViewFilter.origen)" onChange="@command('changeViewFilter')"  sclass="T1" />
+                </auxheader>
+            </auxhead>
+            <listhead>      
+                <listheader hflex="1" sort="auto(coditem)" label="Cod Item" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;"  />  
+                <listheader hflex="1" sort="auto(descripcion)" label="Descripcion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(fecha)" label="Fecha" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(tipomov)" label="Tipo Mov" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(costo)" label="Costo" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(cantrequerida)" label="Cant Requierida" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(unidades)" label="Unidades" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(referencia)" label="Referencia" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(centrocosto)" label="Centro Costo" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(codproceso)" label="Cod Proceso" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(codmaquina)" label="Cod Maquina" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                <listheader hflex="1" sort="auto(origen)" label="Origen" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@load(each.coditem)" style="color:black; font-size: 14px;" /> 
+                    <listcell label="@load(each.descripcion)" style="color:black; font-size: 14px;" /> 
+                    <!--
+                    <listcell label="@load(each.fecha)" style="color:black; font-size: 14px;" />
+                    -->  
+                    <listcell>
+                        <datebox id="" readonly="true" value="@load(each.fecha)" format="dd/MM/yyyy" style="color:black; font-size: 14px;" />
+                    </listcell>
+                    <listcell label="@load(each.tipomov)" style="color:black; font-size: 14px;" />
+                    <!-- <listcell label="@load(each.costo)" style="color:black; font-size: 14px;" />   -->  
+                    <listcell>
+                        <decimalbox id="" readonly="true" value="@load(each.costo)" format="#,##0.00" style="color:black; font-size: 14px;" />
+                    </listcell>
+                    <listcell label="@load(each.cantrequerida)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.unidades)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.referencia)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.centrocosto)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.codproceso)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.codmaquina)" style="color:black; font-size: 14px;" />
+                    <listcell label="@load(each.origen)" style="color:black; font-size: 14px;" />
+                </listitem>
+            </template>
+        </listbox>
+    </div>
+</zk>

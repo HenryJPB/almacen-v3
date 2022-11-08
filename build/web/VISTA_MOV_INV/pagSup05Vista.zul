@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/css/estiloHP.css"/>
+    <!-- ******************************************************************** -->
+    <!-- *******************************(ENCABEZADO.Begin)******************* -->
+    <!-- ******************************************************************** -->
+    <separator bar="true" />
+    <!-- 
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewSup05Vista_v2')">
+    -->
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewSup05Vista')">
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <hlayout style="background:lightgray;">
+            <label id="" value=" * MOVIMIENTOS DE ALMACEN " sclass="TBREADCRUMB" />
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <button id="btnAdd" height="40px" label="AGREGAR" disabled="false" sclass="T2A" />    <!-- style="border-color:black; border:1px; border-radius:15px; background:#4682B4;"/>  -->
+            <button id="btnEdit" height="40px" label="EDITAR" disabled="false" sclass="T2A" />
+            <!--   <button id="btnDel" height="40px" label="ELIMINAR" disabled="false" sclass="T2A" onClick="@command('eliminarRegistro')" />  SUJETO a REVISION: Esto genera salidas indeseables -->  
+            <button id="btnDel" height="40px" label="ELIMINAR" disabled="false" sclass="T2A" /> 
+            <button id="btnRfr" height="40px" label="REFRESCAR" disabled="false" sclass="T2A" onClick="@command('setRefrescarLbx',fecha1=dbxFecha1.getValue(),fecha2=dbxFecha2.getValue())"  />
+            <button id="btnIni" height="40px" label="INICIO" disabled="false" sclass="T2A"/>
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <separator bar="true"/>
+        <!-- ******************************************************************** -->
+        <!-- *******************************(ENCABEZADO.End)********************* -->
+        <!-- ******************************************************************** -->
+        <zscript>
+        <![CDATA[
+            //String[] nomina={"Jose","Jaime","Tobolda","Oscar de Leon","Harry el Sucio","Mr.Jhon","WY","Vinagre","Caramelito de Sabila","El Mismo","EL Otro","Julian"};
+            String ruta = "../IMAGENES/PERSONAL/";  
+            String formatoImg = ".jpg";         
+        ]]>
+        </zscript>
+        <div align="center" > 
+            <listbox id="lbxMovAlmacen" model="@load(vm.viewSup05VistaModel)" height="100%" width="100%" rows="16" checkmark="true" multiple="false" sizedByContent="true" span="true"
+                     emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vm.selectedSup05Vista)" apply="bean.controlador.sup05.ControladorSup05" >  <!-- selectedSup05View hace referencia al metodo get<> de la clase -->  
+                <auxhead>
+                    <auxheader colspan="5" > 
+                        <!-- <image src="../IMAGENES/embudo-filtrante.png" />  -->  
+                        <label id="" value="Desde: " sclass="T1" style="color:black; font-style: normal; font-weight:bold; font-size:12px;"/>
+                        <!-- <datebox id="txtFecha" width="110px" disabled="true" format="dd/MM/yyyy" constraint="${fechaConstraint}" sclass="T1" style="font-size:14px;" />  -->
+                        <datebox id="dbxFecha1" width="110px" disabled="false" format="dd/MM/yyyy" constraint="" onCreate="self.value=new Date()" sclass="T1" style="background: highlight; color:black; font-style: normal; font-weight:bold; font-size:14px;" />
+                        <label id="" value="Hasta: " style="color:black; font-style: normal; font-weight:bold; font-size:12px;" />
+                        <datebox id="dbxFecha2" width="110px" disabled="false" format="dd/MM/yyyy" constraint="" onCreate="self.value=new Date()" sclass="T1" style="background: highlight; color:black; font-style: normal; font-weight:bold; font-size:14px;" />
+                    </auxheader>
+                    <auxheader  colspan="1">
+                        <image id="imgRefrescar" src="../IMAGENES/sign-warning-icon24px.png" visible="false" />
+                        <label id="lblRefrescar" value=" refrescar " visible="false" sclass="ta"  />
+                    </auxheader>
+                    <!--  
+                    <auxheader colspan="2" > 
+                        <image src="../IMAGENES/reload24px.png" />
+                        <button id="btnLimpiarKeys" label="Refrescar" onClick="@command('refrescarListbox')" sclass="T1" style="color:black; font-style: normal; font-weight:bold; font-size:12px;" >
+                            <attribute name="onClick">
+                                //txtCodVarFilter.setValue(null);  
+                                //txtNombreVarFilter.setValue(null);  
+                                //txtValorFilter.setValue(null);  
+                                //@command('changeFilter');         // No funciono ???  
+                                //lbxDefVariables.renderAll();      // No funciono ???
+                                //new bean.modelo.vista.ModelViewDefVariables().changeFilter();   // No funciono ???  
+                            </attribute>
+                        </button>
+                    </auxheader>
+                    -->  
+                </auxhead>
+                <auxhead sclass="category-center">   
+                    <!-- auxheader label="ITEMS ALMACEN" colspan="1" style="font-weight:bold; font-size: 14px"/> -->  
+                    <auxheader colspan="1">  <!-- codigo -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.codItem)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!--grupo -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.descripcion)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- descripcion -->
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.fecha)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- codUbic -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />  
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.tipoMov)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- um -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.unidades)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- nivelControl -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.cantRequerida)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- stockMin -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.costo)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- stockMax -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.referencia)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>            
+                    <auxheader colspan="1">  <!-- ptoReorden -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.centroCosto)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>  
+                    <auxheader colspan="1">  <!-- indicador -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.codProceso)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>            
+                    <auxheader colspan="1">  <!-- indicador -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.codMaquina)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- indicador -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.origen)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- indicador -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox instant="true" width="" value="@bind(vm.viewSup05VistaFilter.observacion)" onChange="@command('changeVistaFilter')"  sclass="T1" />
+                    </auxheader>
+                </auxhead>
+                <listhead>      
+                    <listheader hflex="min" sort="auto(codItem)" label="Cod Item" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;"  />  
+                    <listheader hflex="min" sort="auto(descripcion)" label="Descripcion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(fechaS)" label="Fecha" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(tipoMov)" label="Tipo Mov" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(unidadesS)" label="Unidades" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(cantRequeridaS)" label="Cant Requierida" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(costoS)" label="Costo" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />     
+                    <listheader hflex="min" sort="auto(referencia)" label="Referencia" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(centroCosto)" label="Centro Costo" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(codProceso)" label="Cod Proceso" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(codMaquina)" label="Cod Maquina" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(origen)" label="Origen" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(observacion)" label="Observacion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="@load(each.codItem)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.descripcion)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.fechaS)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.tipoMov)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.unidadesS)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.cantRequeridaS)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.costoS)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.referencia)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.centroCosto)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.codProceso)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.codMaquina)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.origen)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.observacion)" style="color:black; font-size: 14px;" />
+                    </listitem>
+                </template>
+                <!--
+                <attribute name="onAfterRender">
+                        <![CDATA[
+                            List lista = new bean.servicio.ServicioAdmonSup05Vista().getListaSup05Vista(dbxFecha1.getValue(), dbxFecha1.getValue());  
+                            self.setModel( new org.zkoss.zul.ListModelList<bean.modelo.entidad.Sup05Vista>(lista) );
+                            self.renderAll(); 
+                        ]]>
+                </attribute>
+                -->
+                <!--
+                <attribute name="onCreate">
+                    //@command("setRefrescarLbx",fecha1=dbxFecha1.getValue(),fecha2=dbxFecha1.getValue())
+                    List lista = new bean.servivio.ServicioAdmonSup05Vista().getListaSup05Vista(dbxFecha1.getValue(), dbxFecha1.getValue());  
+                    lbxMovAlmacen.setModel(new ListModelList<Sup05Vista>(lista));
+                    lbxMovAlmacen.renderAll(); 
+                </attribute>
+                -->
+            </listbox>
+        </div>
+    </div>
+</zk>

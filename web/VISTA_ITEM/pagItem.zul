@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style src="/css/estiloHP.css"/>
+    <!-- ********************************************************************** -->
+    <!-- *******************************(ENCABEZADO.Begin)********************* -->
+    <!-- ********************************************************************** -->
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('bean.modelo.vista.ModelViewItem')" > 
+        <separator bar="true" />
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <hlayout style="background:lightgray;">
+            <label id="" value=" * ITEMS DE ALMACEN " sclass="TBREADCRUMB" />
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <button id="btnAdd" height="40px" label="AGREGAR" disabled="false" sclass="T2A" />    <!-- style="border-color:black; border:1px; border-radius:15px; background:#4682B4;"/>  -->
+            <button id="btnEdit" height="40px" label="EDITAR" disabled="false" sclass="T2A"/>
+            <button id="btnDel" height="40px" label="ELIMINAR" disabled="false" sclass="T2A"/>
+            <button id="btnRfr" height="40px" label="REFRESCAR" disabled="false" sclass="T2A"/>
+            <button id="btnClr" height="40px" label="LIMPIAR FILTROS" image="" disabled="false" sclass="T2A"  onClick="@command('cleanFilter')" />
+            <button id="btnIni" height="40px" label="INICIO" disabled="false" sclass="T2A"/>
+        </hlayout>
+        <hlayout style="background:lightgray;" >
+            <space />
+        </hlayout>
+        <separator bar="true" />
+        <!-- ******************************************************************* -->
+        <!-- *******************************(ENCABEZADO.End)******************** -->
+        <!-- ******************************************************************* -->
+        <zscript>
+        <![CDATA[
+            //String[] nomina={"Jose","Jaime","Tobolda","Oscar de Leon","Harry el Sucio","Mr.Jhon","WY","Vinagre","Caramelito de Sabila","El Mismo","EL Otro","Julian"};
+            String ruta = "../IMAGENES/PERSONAL/";  
+            String formatoImg = ".jpg";         
+        ]]>
+        </zscript>
+        <!-- <include src="/VISTA_PERSONAL/catalogoPersonalV2.zul" />  -->  
+        <div align="center" > 
+            <listbox id="lbxItemsAlmacen" model="@load(vm.itemViewModel)" height="100%" width="100%" rows="16"  checkmark="true" multiple="false" 
+                     emptyMessage="LISTA SIN REGISTROS" selectedItem="@bind(vm.selectedItem)" sizedByContent="true" span="true" mold="paging"
+                     apply="bean.controlador.item.ControladorSup01"  >  
+                <auxhead sclass="category-center">   
+                    <!-- auxheader label="ITEMS ALMACEN" colspan="1" style="font-weight:bold; font-size: 14px"/> -->  
+                    <auxheader colspan="1">  <!-- codigo -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroCod" instant="true" width="" value="@bind(vm.itemViewFilter.codigo)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!--grupo -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroGroup" instant="true" width="" value="@bind(vm.itemViewFilter.grupo)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- descripcion -->
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroDescrip"  instant="true" width="" value="@bind(vm.itemViewFilter.descripcion)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- codUbic -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />  
+                        <textbox id="txtFiltroCodUbic" instant="true" width="" value="@bind(vm.itemViewFilter.codUbic)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- um -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroUm" instant="true" width="" value="@bind(vm.itemViewFilter.um)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- nivelControl -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroNivelCtlr" instant="true" width="" value="@bind(vm.itemViewFilter.nivelControl)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- stockMin -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroSMin" instant="true" width="" value="@bind(vm.itemViewFilter.stockMin)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>
+                    <auxheader colspan="1">  <!-- stockMax -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroSMax" instant="true" width="" value="@bind(vm.itemViewFilter.stockMax)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>            
+                    <auxheader colspan="1">  <!-- ptoReorden -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroPtoReo" instant="true" width="" value="@bind(vm.itemViewFilter.ptoReorden)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>  
+                    <auxheader colspan="1">  <!-- indicador -->  
+                        <image src="../IMAGENES/embudo-filtrante.png" />
+                        <textbox id="txtFiltroIndica" instant="true" width="" value="@bind(vm.itemViewFilter.indicador)" onChange="@command('changeFilter')"  sclass="T1" />
+                    </auxheader>            
+                </auxhead>
+                <listhead>      
+                    <listheader hflex="min" sort="auto(codigo)" label="Cod Item" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;"  />  
+                    <listheader hflex="min" sort="auto(grupo)" label="Familia" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(descripcion)" label="Descripcion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(codUbic)" label="Ubicacion" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(um)" label="UM" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(nivelControl)" label="Criticidad" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(stockMin)" label="Stock MIN" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(stockMax)" label="Stock MAX" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(ptoReorden)" label="Pto Reorden" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                    <listheader hflex="min" sort="auto(indicador)" label="Indicador" style="color:#4682B4; font-style: normal; font-weight:bold; font-size:16px;" />
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="@load(each.codigo)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.grupo)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.descripcion)" style="color:black; font-size: 14px;" /> 
+                        <listcell label="@load(each.codUbic)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.um)" style="color:black; font-size: 14px;" />  
+                        <listcell label="@load(each.nivelControl)" style="color:black; font-size:14px;" />
+                        <listcell label="@load(each.stockMin)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.stockMax)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.ptoReorden)" style="color:black; font-size: 14px;" />
+                        <listcell label="@load(each.indicador)" style="color:black; font-size: 14px;" />
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+    </div>
+</zk>
